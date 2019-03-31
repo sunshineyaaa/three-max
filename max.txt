@@ -1,0 +1,80 @@
+这个算法的目的在于求出给定数组中的最大的三个数的乘积
+我的方法是 ：
+public class Solution {
+	public static void main(String[] args) {
+Scanner in=new Scanner(System.in);
+int m=in.nextInt();
+long [] array=new long[m];
+for (int i=0;i<m;i++)
+{
+	array[i]=in.nextLong();
+}
+in.close();
+getmax(array,m);
+}
+	static void getmax(long [] num,int len)
+	{
+		long max1=0,max2=0,max3=0,min1=0,min2=0;
+	for(int i=0;i<len;i++)
+				{
+		if(num[i]!=0)
+		{
+				for(int j=i+1;j<len;j++)
+					{
+					if(num[i]<num[j])
+					{
+						long a=num[i];
+						num[i]=num[j];
+						num[j]=a;
+					}	
+					}
+		}
+		else continue;
+				
+		}	
+	max1=num[0];max2=num[1];max3=num[2];
+	min1=num[len-1];min2=num[len-2];
+	long max=Math.max(max3*max2*max1, max1*min1*min2);
+	System.out.println(max);
+			}
+		
+	}
+	将数组中的元素进行相关的排序 然后 可能会出现负数 再用一个函数来进行判断
+	别人的思想好像更好也更快一点
+	public class Main { public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long[] array = new long[n];
+        for (int i = 0; i <n ; i++) {
+            array[i] = sc.nextLong();
+        }
+        getLargestMul(array,n);
+    }
+    static void getLargestMul(long[] num, int len){
+        long max1=0,max2=0,max3=0, min1=0,min2=0;
+        for (int i = 0; i <len ; i++) {
+            if(num[i]!=0){
+                if(num[i]>max1){
+                    max3 = max2;
+                    max2 = max1;
+                    max1 = num[i];
+                }else if(num[i]>max2){
+                    max3 = max2;
+                    max2 = num[i];
+                }else if(num[i]>max3){
+                    max3 = num[i];
+                }else if(num[i]<min1 ){
+                    min2 = min1;
+                    min1 = num[i];
+                }else if(num[i]>min1 && num[i]<min2){
+                    min2 = num[i];
+                }
+            }else continue;
+
+        }
+        long max = Math.max(max1*max2*max3,max1*min1*min2);
+        System.out.println(max);
+    }
+} 
+再进行求解 需要理解
+
